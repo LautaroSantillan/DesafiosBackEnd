@@ -1,2 +1,14 @@
 [
+  {
+    "id": 1,
+    "title": "Coca-Cola",
+    "price": 180,
+    "thumbnail": "https://www.cocacola.es/content/dam/one/es/es2/coca-cola/products/productos/dic-2021/CC_Origal.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Pepsi",
+    "price": 150,
+    "thumbnail": "https://www.boulevard-sa.com.ar/Site/img/products/pepsi/Pepsi-350-V-L.jpg"
+  }
 ]

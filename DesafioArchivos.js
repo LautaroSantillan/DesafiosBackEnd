@@ -71,19 +71,19 @@ class Contendor {
         }
     }
     //Metodo para eliminar todos los objs del []
-    // async deleteAll(){
-    //     try {
-    //         const objs = await this.getAll();
-    //         if(objs.length != 0){
-    //             const eliminar = objs.splice(0, objs.length);
-    //             return console.log(eliminar);
-    //         } else {
-    //             return console.log("Array vacio");
-    //         }
-    //     } catch (error) {
-    //         console.log(`Error al eliminar todo: ${error}`);
-    //     }
-    // }
+    async deleteAll(){
+        try {
+            const objs = await this.getAll();
+
+            if(objs.length == 0){
+                return console.log("Array vacio");
+            } else {
+                await fs.writeFile(this.rutaFile, JSON.stringify([], null, 2));
+            }
+        } catch (error) {
+            console.log(`Error al eliminar todo: ${error}`);
+        }
+    }
 }
 //PRUEBA
 async function main(){
@@ -91,8 +91,9 @@ async function main(){
     console.log(await Prueba.save({title: "Coca-Cola", price: 180, thumbnail: "https://www.cocacola.es/content/dam/one/es/es2/coca-cola/products/productos/dic-2021/CC_Origal.jpg"}));
     console.log(await Prueba.save({title: "Pepsi", price: 150, thumbnail: "https://www.boulevard-sa.com.ar/Site/img/products/pepsi/Pepsi-350-V-L.jpg"}));
     console.log(await Prueba.save({title: "Manaos", price: 120, thumbnail: "https://http2.mlstatic.com/D_NQ_NP_716200-MLA43739181284_102020-O.jpg"}));
-    console.log(await Prueba.getById(2));
+    console.log(await Prueba.getById(3));
     console.log(await Prueba.deleteById(3));
+    //console.log(await Prueba.deleteAll());
     console.log(await Prueba.getAll());
 }
 main();
