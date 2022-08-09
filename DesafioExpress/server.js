@@ -27,9 +27,8 @@ const products = [
 
 app.get('/productos', (req, res) => {
     //res.status(202).send('<h1>Estas en /productos</h1></br><p>Aqui se retornaran todos los productos</p>');
-    //res.json({name:"Lautaro", lastname: "Santillan"})
+    //res.send(products)
     res.send(main());
-    //res.send(productos.getAll());
 })
 
 app.get('/productoRandom', (req, res) => {
