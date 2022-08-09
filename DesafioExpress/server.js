@@ -29,7 +29,8 @@ app.get('/productos', (req, res) => {
     res.status(202).send('<h1>Estas en /productos</h1></br><p>Aqui se retornaran todos los productos</p>');
     //res.send(console.log(products));
     //res.send(main());
-    res.send(productos.getAll());
+    //res.send(productos.getAll());
+    main();
 })
 
 app.get('/productoRandom', (req, res) => {
