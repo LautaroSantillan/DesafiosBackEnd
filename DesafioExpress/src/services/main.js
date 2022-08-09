@@ -5,7 +5,7 @@ class Contenedor {
     //Metodo para retornar todos los objs que haya en el []
     async getAll(){
         try{
-            const products = await fs.readFile('../productos.json', 'utf-8');
+            const products = await fs.readFile('../DB/productos.json', 'utf-8');
             return (JSON.parse(products));
         }
         catch(error){
