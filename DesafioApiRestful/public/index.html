@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api RESTful</title>
+</head>
+<body style="background-color: beige;font-family: 'Courier New', Courier, monospace;">
+    <h1>Desafio de API RESTful</h1>
+    <br>
+    <h2>Formulario: Ingreso de productos</h2>
+    <form action="/api/productos" enctype="multipart/form-data" method="POST">
+        <br>Titulo: <input type="text" name="title">
+        <br>Precio: <input type="text" name="price">
+        <br>Foto: <input type="file" name="thumbnail">
+        <br>
+        <button type="submit">Enviar</button>
+        <button type="reset">Borrar</button>
+    </form>
+</body>
+</html>
