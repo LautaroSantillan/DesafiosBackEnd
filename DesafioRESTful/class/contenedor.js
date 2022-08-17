@@ -1,16 +1,16 @@
-const fs = require('fs')
+const fs = require('fs/promises');
 
 class Contenedor {
     constructor(name) {
-        this.fileName = name
-        this.countID = 0
-        this.content = []
-        this.init()
+        this.fileName = name;
+        this.countID = 0;
+        this.content = [];
+        this.init();
     }
-
+    //Método para inicializar el archivo
     async init() {
         try {
-			let data = await fs.promises.readFile(this.fileName);
+			let data = await fs.readFile(this.fileName);
 			this.content = JSON.parse(data);
 			for (const element of this.content) {
 				if (element.id > this.countID) this.countID = element.id;
@@ -19,24 +19,24 @@ class Contenedor {
 			console.log('Aún no hay archivo');
 		}
     }
-
-    async write() { //Método que escribe/sobreescribe: de este manera queda más limpio el código de los otros métodos
-        await fs.promises.writeFile(this.fileName, JSON.stringify(this.content))
+    //Método que escribe/sobreescribe
+    async write() {
+        await fs.writeFile(this.fileName, JSON.stringify(this.content))
     }
-
+    //Método para guardar un producto
     save(object) {
-        this.countID++ //Aumento la propiedad que va guardando el ID más alto
-        object["id"] = this.countID //Agrego la propiedad id al objeto pasado como parámetro
-        this.content.push(object) //Agrego el objeto al contenido(array)
-        this.write() //Agrego el objeto al archivo
-        return `El id del objeto añadido es ${this.countID}.` //Retorna el ID (lo solicita la consigna)
+        this.countID++ 
+        object["id"] = this.countID 
+        this.content.push(object) 
+        this.write() 
+        return `El id del objeto añadido es ${this.countID}` 
     }
-
-    getAll() { //Devuelve un array con los objetos presentes en el archivo
+    //Método para obtener todos los productos
+    getAll() {
         return this.content
     }
-
-    getById(id) { //Recibe un id y devuelve el objeto con ese id, o null si no está.
+    //Método para obtener un producto según ID
+    getById(id) {
         let result
         if (this.content !== []) {
             result = this.content.find(x => x.id === id)
@@ -48,8 +48,8 @@ class Contenedor {
         }
         return result
     }
-
-    deleteById(id) { //Elimina del archivo el objeto con el id buscado
+    //Método para eliminar un producto según ID
+    deleteById(id) { 
         let result
         if (this.content !== []) {
             let newContent = this.content.filter(x => x.id !== id)
@@ -61,12 +61,7 @@ class Contenedor {
         }
         return result
     }
-
-    async deleteAll() { //Elimina todos los objetos presentes en el archivo.
-        this.content = await this.content.splice(0, this.content.length)
-        this.write()
-    }
-
+    //Método para actualizar productos
     update(id, obj){
         const index = this.content.findIndex( objT => objT.id == id);
         obj.id = this[index].id
@@ -75,4 +70,4 @@ class Contenedor {
     }
 }
 
-module.exports = Contenedor
+module.exports = Contenedor;
