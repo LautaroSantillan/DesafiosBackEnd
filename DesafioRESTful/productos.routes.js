@@ -1,7 +1,7 @@
 const express = require('express');
 const routerProductos = express.Router();
-const Container = require('./class/contenedor');
-const productos = new Container('./data/productos.json');
+const Container = require('./Class/contenedor');
+const productos = new Container('./DB/productos.json');
 
 routerProductos.get('/', (req, res)=>{
     return res.json(productos.content);

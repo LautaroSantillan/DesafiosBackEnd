@@ -8,7 +8,7 @@ const routerProductos = require('./productos.routes.js');
 
 /* ---------------------- Middlewares ---------------------- */
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 
