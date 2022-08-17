@@ -1,72 +1,89 @@
 const fs = require('fs/promises')
 
 class Contenedor {
-    constructor() {
-        this.countID = 0;
-        this.content = [];
-        this.init();
-    }
-    //Iniciar archivo
-    async init() {
+    constructor() {}
+    //Método para guardar el producto
+    async save(prod){
         try {
-			let data = await fs.readFile('./productos.json');
-			this.content = JSON.parse(data);
-			for (const element of this.content) {
-				if (element.id > this.countID) this.countID = element.id;
-			}
-		} catch (error) {
-			console.log('Aún no hay archivo');
-		}
-    }
-    //Método para escribir o sobreescribir
-    async write() {
-        await fs.writeFile('./productos.json', JSON.stringify(this.content));
-    }
-    //Método para guardar producto
-    save(product) {
-        this.countID++;
-        product["id"] = this.countID;
-        this.content.push(product);
-        this.write();
-        return `El id del objeto añadido es ${this.countID}`;
-    }
-    //Método para devolver todos los productos existentes
-    getAll() {
-        return this.content;
-    }
-    //Método para mostrar un producto según el ID
-    getById(id) {
-        let result;
-        if (this.content !== []) {
-            result = this.content.find(x => x.id === id)
-            if (result === undefined) {
-                result = null;
+            const objs = await this.getAll();
+            
+            let newId;
+            if(objs.length == 0){
+                newId = 1;
+            } else {
+                newId = objs[objs.length - 1].id + 1;
             }
-        } else {
-            result = 'El archivo está vacío';
+
+            const newProd = {id: newId, ...prod};
+            objs.push(newProd);
+
+            await fs.writeFile('./productos.json', JSON.stringify(objs, null, 2));
+
+            return `El id del objeto añadido es ${newId}`;
+        } catch (error) {
+            console.log(`ERROR AL GUARDAR: ${error}`);
         }
-        return result;
     }
-    //Método para eliminar producto según el ID
-    deleteById(id) {
-        let result;
-        if (this.content !== []) {
-            let newContent = this.content.filter(x => x.id !== id)
-            this.content = newContent;
-            this.write();
-            result = `El producto ${id} fue eliminado`;
-        } else {
-            result = `El archivo está vacío`;
+    //Metodo para retornar el obj del id ingresado
+    async getById(id){
+        try {
+            const objs = await this.getAll();
+
+            const idObj = objs.find(obj => {
+                return obj.id == id
+            });
+            if (idObj == undefined) {
+                console.log(`No se pudo encontrar el producto con id ${id}`);
+                return null;
+            } else {
+                return console.log(idObj);
+            }
+        } catch (error) {
+            console.log(`ERROR AL OBTENER EL PRODUCTO ${id}: ${error}`);
         }
-        return result;
+    }
+    //Metodo para retornar todos los objs que haya en el []
+    async getAll(){
+        try{
+            const products = await fs.readFile('./productos.json', 'utf-8');
+            return (JSON.parse(products));
+        }
+        catch(error){
+            console.log(`ERROR AL LEER: ${error}`);
+        }
+    }
+    //Metodo para eliminar obj con id del [] 
+    async deleteById(id){
+        try {
+            const objs = await this.getAll();
+
+            const indexObj = objs.findIndex((obj)=> obj.id == id);
+            if (indexObj == -1) {
+                return console.log(`No se pudo encontrar el producto con id ${id}`);
+            } else {
+                objs.splice(indexObj, 1);
+                await fs.writeFile('./productos.json', JSON.stringify(objs, null, 2)); 
+            }
+        } catch (error) {
+            return console.log(`NO SE PUDO ELIMINAR EL PRODUCTO ${id}: ${error}`);
+        }
     }
     //Método para actualizar un producto según ID
-    update(id, obj){
-        const index = this.content.findIndex(obj => obj.id == id);
-        obj.id = this[index].id;
-        this.content[index] = obj;
-        return obj;
+    async update(id, obj){
+        try {
+            const objs = await this.getAll();
+
+            const indexObj = objs.findIndex((obj)=> obj.id == id);
+            if (indexObj == -1) {
+                return console.log(`No se pudo encontrar el producto con id ${id}`);
+            } else {
+                objs[indexObj] = obj;
+                return (obj);
+            }
+        } catch (error) {
+            return console.log(`NO SE PUDO ACTUALIZAR EL PRODUCTO ${id}: ${error}`);
+        }
     }
 }
 
-module.exports = Contenedor
+module.exports = Contenedor;
