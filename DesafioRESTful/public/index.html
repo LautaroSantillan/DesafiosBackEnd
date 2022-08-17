@@ -1,16 +1,21 @@
-<h1 style="background-color: black; color: white; text-align: center">
-  Carga de productos
-</h1>
-
-<form action="/api/productos" method="post">
-  Title: <input type="text" name="title" /><br /><br />
-  Price: <input type="number" name="price" /><br /><br />
-  Thumbnail: <input type="text" name="thumbnail" /><br /><br />
-
-  <button
-    type="submit"
-    style="background-color: black; color: white; text-align: center"
-  >
-    Agregar producto
-  </button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API RESTful</title>
+</head>
+<body style="background-color: beige;font-family: 'Courier New', Courier, monospace;">
+  <h1 style="background-color: black; color: white; text-align: center">Formulario: Ingreso de productos</h1>
+  <br>
+  <form action="/api/productos" method="post">
+    <br>Titulo: <input type="text" name="title">
+    <br>Precio: <input type="text" name="price">
+    <br>Thumbnail: <input type="text" name="thumbnail">
+    <br><br>
+    <button type="submit"style="background-color: black; color: white; text-align: center">Agregar producto</button>
+    <button type="reset" style="background-color: black; color: white; text-align: center">Vaciar</button>
+  </form>
+</body>
+</html>
