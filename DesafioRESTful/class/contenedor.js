@@ -21,50 +21,50 @@ class Contenedor {
     }
     //Método que escribe/sobreescribe
     async write() {
-        await fs.writeFile(this.fileName, JSON.stringify(this.content))
+        await fs.writeFile(this.fileName, JSON.stringify(this.content));
     }
     //Método para guardar un producto
     save(object) {
-        this.countID++ 
-        object["id"] = this.countID 
-        this.content.push(object) 
-        this.write() 
-        return `El id del objeto añadido es ${this.countID}` 
+        this.countID++; 
+        object["id"] = this.countID; 
+        this.content.push(object); 
+        this.write(); 
+        return `El id del objeto añadido es ${this.countID}`; 
     }
     //Método para obtener todos los productos
     getAll() {
-        return this.content
+        return this.content;
     }
     //Método para obtener un producto según ID
     getById(id) {
-        let result
+        let result;
         if (this.content !== []) {
-            result = this.content.find(x => x.id === id)
+            result = this.content.find(x => x.id === id);
             if (result === undefined) {
-                result = null
+                result = null;
             }
         } else {
-            result = 'El archivo está vacío'
+            result = 'El archivo está vacío';
         }
-        return result
+        return result;
     }
     //Método para eliminar un producto según ID
     deleteById(id) { 
-        let result
+        let result;
         if (this.content !== []) {
-            let newContent = this.content.filter(x => x.id !== id)
-            this.content = newContent
-            this.write() //SobreEscribo el archivo
-            result = `El producto fue eliminado`
+            let newContent = this.content.filter(x => x.id !== id);
+            this.content = newContent;
+            this.write();
+            result = `El producto ${id} fue eliminado`;
         } else {
-            result = `El archivo está vacío`
+            result = `El archivo está vacío`;
         }
-        return result
+        return result;
     }
     //Método para actualizar productos
     update(id, obj){
-        const index = this.content.findIndex( objT => objT.id == id);
-        obj.id = this[index].id
+        const index = this.content.findIndex(objT => objT.id == id);
+        obj.id = this.content[index].id;
         this.content[index] = obj;
         return obj;
     }
