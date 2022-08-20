@@ -1,0 +1,22 @@
+<h2 style="color:crimson;">Historial</h2>
+
+<% if(content.length > 0){ %> 
+    <div class="table-responsive">
+        <table class="table table-dark">
+            <tr style="color: yellow;"> <th>Nombre</th> <th>Precio</th> <th>Logo</th> </tr>
+            <!-- filas -->
+            <% content.forEach(producto => { %> 
+            <tr> 
+                <td><%=producto.nombre %> </td>
+                <td><%=producto.precio %> </td>
+                <td>
+                    <img size="30x30" src="<%=producto.logo%>" alt="">
+                </td>
+            </tr>
+            <% }); %> 
+            <!-- Fin filas -->
+        </table>
+    </div>
+<% } else { %> 
+    <h3 class="alert alert-danger">No se encontraron dato</h3>
+<% } %> 
