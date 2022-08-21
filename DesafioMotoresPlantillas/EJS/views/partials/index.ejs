@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Head -->
   <%- include('head');%>
   <body class="container bg-light">
+    <!-- Navbar -->
     <%- include('navbar');%>
-    
     <h2 class="text-primary mt-2">Ingrese datos</h2>
+    <!-- Inicio Formulario -->
     <form action="/productos" method="post">
       <div class="mb-3">
         <label for="title" class="form-label">Título</label>
@@ -20,7 +22,8 @@
       </div>
       <button type="submit" class="btn btn-success">Cargar producto</button>
     </form>
-
+    <!-- Fin formulario -->
+    <!-- Scripts -->
     <%- include('scripts');%>
   </body>
 </html>
