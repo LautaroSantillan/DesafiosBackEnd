@@ -63,9 +63,10 @@ class Contenedor {
     }
     //Método para actualizar productos
     update(id, obj){
-        const index = this.content.findIndex(objT => objT.id == id);
-        obj.id = this.content[index].id;
-        this.content[index] = obj;
+        const index = this.getById(id);
+        obj[id].title = this.content[index].title;
+        obj[id].price = this.content[index].price;
+        obj[id].thumbnail = this.content[index].thumbnail;
         return obj;
     }
 }
