@@ -1,11 +1,11 @@
 <h2 class="text-primary">Centro de mensajes</h2>
 <form action="/" method="post" id="myChat">
   <div class="mb-3">
-    <input id="username" type="text" class="form-control w-25" placeholder="Ingrese su e-mail"/>
+    <input id="username" type="text" class="form-control w-25" placeholder="Ingrese su e-mail" required/>
   </div>
   <div class="mb-3">
     <input id="text" type="text" class="form-control w-25 d-inline" placeholder="Ingrese un mensaje"/>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-primary" onclick="newMessage()">Enviar</button>
   </div>
   <hr>
   <div id="messages"></div>

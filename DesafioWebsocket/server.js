@@ -33,7 +33,7 @@ app.post("/", (req, res) => {
 });
 
 /* ---------------------- Servidor ----------------------*/
-const PORT = 4040;
+const PORT = 8880;
 const server = app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto http://localhost:${PORT}/`);
 });
@@ -41,13 +41,13 @@ const server = app.listen(PORT, () => {
 server.on('error', error => console.log(`Error en servidor ${error}`));
 
 /* ---------------------- WebSocket ----------------------*/
-io.on('connection', (socket)=>{
+io.on('connection', (socket) => {
     console.log(`Nuevo cliente conectado! ${socket.id}`);
     socket.emit('from-server-messages', messages);
 
-    socket.on("new-message", (data) => {
+    socket.on('from-client-messages', (data) => {
         data.time = new Date().toLocaleString();
         messages.push(data);
-        io.sockets.emit("messages", [data]);
+        io.sockets.emit('from-server-messages', [data]);
     });
 })
