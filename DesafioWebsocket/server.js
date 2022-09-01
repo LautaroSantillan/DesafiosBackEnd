@@ -1,17 +1,14 @@
 /* ---------------------- Modulos ----------------------*/
 const express = require('express');
 const morgan = require('morgan');
-const { Server: HttpServer } = require('http');
-const { Server: IOServer } = require('socket.io');
 const Contenedor = require('./class/contenedor');
 
 /* ------------------- Instancia Server -------------------*/
 const app = express();
-const httpServer = new HttpServer(app);
-const io = new IOServer(httpServer);
 const productos = new Contenedor(__dirname + '/DB/productos.json');
 
 /* ---------------------- Middlewares ----------------------*/
+app.use(express.static('./public')) 
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: true}));
@@ -33,14 +30,20 @@ app.post("/", (req, res) => {
 });
 
 /* ---------------------- Servidor ----------------------*/
-const PORT = 8880;
+const PORT = 8888;
 const server = app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto http://localhost:${PORT}/`);
 });
 
+const io = require('socket.io')(server);
+
 server.on('error', error => console.log(`Error en servidor ${error}`));
 
 /* ---------------------- WebSocket ----------------------*/
+const messages = [
+    {author: 'example@gmail.com', text: 'Bienvenido al server', datetime: '31/08/2022, 20:30:45'}
+]
+
 io.on('connection', (socket) => {
     console.log(`Nuevo cliente conectado! ${socket.id}`);
     socket.emit('from-server-messages', messages);
