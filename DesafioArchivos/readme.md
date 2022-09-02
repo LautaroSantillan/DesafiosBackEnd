@@ -14,7 +14,7 @@ deleteById(Number): void - Elimina del archivo el objeto con el id buscado.
 
 deleteAll(): void - Elimina todos los objetos presentes en el archivo.
 
->> Aspectos a incluir en el entregable: 
+ >> Aspectos a incluir en el entregable: 
 El método save incorporará al producto un id numérico, que deberá ser siempre uno más que el id del último objeto agregado (o id 1 si es el primer objeto que se agrega) y no puede estar repetido.
 Tomar en consideración el contenido previo del archivo, en caso de utilizar uno existente.
 Implementar el manejo de archivos con el módulo fs de node.js, utilizando promesas con async/await y manejo de errores.
@@ -26,4 +26,3 @@ El formato de cada producto será :
     price: (precio),
     thumbnail: (url de la foto del producto)
 }
-
