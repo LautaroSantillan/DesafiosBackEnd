@@ -14,11 +14,11 @@ app.use(express.urlencoded({extended: true}));
 
 /* -------------------- Routes --------------------*/
 app.use('/api/productos', routerProducts);
-app.use('/api/cart', routerCart);
+app.use('/api/carrito', routerCart);
 app.use('*', (req, res) => {
     const path = req.params;
     const method = req.method;
-    res.send({ error: -2, descripcion: `Ruta ${path[0]} Metodo ${method} no implementada`})
+    res.send({ error: -2, descripción: `Ruta ${path} Metodo ${method} no implementada`})
 })
 
 /* ---------------------- Servidor ----------------------*/

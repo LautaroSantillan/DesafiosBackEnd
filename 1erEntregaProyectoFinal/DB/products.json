@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "name": "Lego Star Wars: The Skywalker Saga™",
+    "description": "Ultimo juego de Lego sobre la saga de Star Wars",
+    "code": "LEGST2022",
+    "pic": "https://cdn2.iconfinder.com/data/icons/heroes-villains-vol-1/100/Empire_Stormtrooper-128.png",
+    "price": 210,
+    "stock": 20,
+    "id": 1,
+    "timestamp": 1662406572962
+  },
+  {
+    "name": "Lego Harry Potter™",
+    "description": "Juego de Lego Harry Potter versión digital",
+    "code": "LEGHP1-7",
+    "pic": "https://cdn2.iconfinder.com/data/icons/harry-potter-colour-collection/60/21_-_Harry_Potter_-_Colour_-_Glasses_and_Scar-128.png",
+    "price": 150,
+    "stock": 12,
+    "id": 2,
+    "timestamp": 1662406804018
+  },
+  {
+    "name": "Lego Jurassic World™",
+    "description": "Juego de Lego basado en las sagas de Jurrasic Park y Jurassic World",
+    "code": "LEGJW1-4",
+    "pic": "https://cdn4.iconfinder.com/data/icons/the-lost-world-flat/340/dinosaur_jurassic_animal_ancient_dino_wild_celociraptor-128.png",
+    "price": 120,
+    "stock": 8,
+    "id": 3,
+    "timestamp": 1662408326737
+  }
+]

@@ -3,14 +3,12 @@ const carts = new Container('./DB/cart.json');
 
 //Añadir carrito
 const addCart = (req, res) => {
-    const products = req.body;
-    if (!products) {
-        return carts.save([]);
-    } else {
-        carts.save(products);
-        res.json({ message: 'Carrito agregado' });
-    }
-}
+    const cart = {
+        product: []
+    };
+    carts.save(cart);
+    res.json({ message: 'Carrito agregado' });
+};
 
 //Elimina carrito
 const deleteCart = (req, res) => {
@@ -25,7 +23,7 @@ const deleteCart = (req, res) => {
             res.json({ message: 'Carrito eliminado' });
         }
     }
-}
+};
 
 //Obtiene productos de un carrito segun ID
 const getProducts = (req, res) => {
@@ -40,7 +38,7 @@ const getProducts = (req, res) => {
             res.json({ 'Productos': cartSelected.products });
         }
     }
-}
+};
 
 //Agrega producto a un carrito
 const addProductToCart = (req, res) => {
@@ -56,7 +54,7 @@ const addProductToCart = (req, res) => {
             res.json({ message: productSaved });
         }
     }
-}
+};
 
 //Elimina producto de un carrito
 const deleteProduct = (req, res) => {
@@ -72,6 +70,6 @@ const deleteProduct = (req, res) => {
             res.json({ message: 'Producto eliminado' });
         }
     }
-}
+};
 
 export { addCart, deleteCart, getProducts, addProductToCart, deleteProduct };
