@@ -13,7 +13,7 @@ routerCarts.post('/', (req, res) => addCart(req, res)); //Funciona
 routerCarts.delete('/:id', (req, res) => deleteCart(req, res)); //Funciona
 
 //Obtener productos de un carrito especifico
-routerCarts.get('/:id/productos', (req, res) => getProducts(req, res));
+routerCarts.get('/:id/productos', (req, res) => getProducts(req, res)); //Funciona
 
 //Añadir producto a un carrito 
 routerCarts.post('/:id/productos', (req, res) => addProductToCart(req, res));

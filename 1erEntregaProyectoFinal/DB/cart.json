@@ -3,5 +3,36 @@
     "product": [],
     "id": 1,
     "timestamp": 1662411080354
+  },
+  {
+    "product": [],
+    "id": 2,
+    "timestamp": 1662504425986
+  },
+  {
+    "product": [
+      {
+        "name": "Lego Star Wars: The Skywalker Saga™",
+        "description": "Ultimo juego de Lego sobre la saga de Star Wars",
+        "code": "LEGST2022",
+        "pic": "https://cdn2.iconfinder.com/data/icons/heroes-villains-vol-1/100/Empire_Stormtrooper-128.png",
+        "price": 210,
+        "stock": 20,
+        "id": 1,
+        "timestamp": 1662406572962
+      },
+      {
+        "name": "Lego Star Wars: The Skywalker Saga™",
+        "description": "Ultimo juego de Lego sobre la saga de Star Wars",
+        "code": "LEGST2022",
+        "pic": "https://cdn2.iconfinder.com/data/icons/heroes-villains-vol-1/100/Empire_Stormtrooper-128.png",
+        "price": 210,
+        "stock": 20,
+        "id": 1,
+        "timestamp": 1662406572962
+      }
+    ],
+    "id": 3,
+    "timestamp": 1662505221189
   }
 ]
