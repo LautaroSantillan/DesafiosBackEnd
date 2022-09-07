@@ -130,6 +130,12 @@ class Container {
             console.log(error);
         }
     };
+    //Listar 
+    list(id) {
+        const objs = this.getAll();
+        const search = objs.find(o => o.id == id);
+        return search;
+    }
 };
 
 export default Container;

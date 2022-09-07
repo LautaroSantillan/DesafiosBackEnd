@@ -16,9 +16,9 @@ routerCarts.delete('/:id', (req, res) => deleteCart(req, res)); //Funciona
 routerCarts.get('/:id/productos', (req, res) => getProducts(req, res)); //Funciona
 
 //Añadir producto a un carrito 
-routerCarts.post('/:id/productos', (req, res) => addProductToCart(req, res));
+routerCarts.post('/:id/productos', (req, res) => addProductToCart(req, res)); //No funciona
 
 //Eliminar producto de un carrito 
-routerCarts.delete('/:id/productos/:id_prod', (req, res) => deleteProduct(req, res));
+routerCarts.delete('/:id/productos/:id_prod', (req, res) => deleteProduct(req, res)); //No funciona
 
 export default routerCarts;

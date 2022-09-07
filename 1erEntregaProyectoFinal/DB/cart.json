@@ -1,6 +1,17 @@
 [
   {
-    "product": [],
+    "product": [
+      {
+        "name": "Lego Harry Potter™",
+        "description": "Juego de Lego Harry Potter versión digital",
+        "code": "LEGHP1-7",
+        "pic": "https://cdn2.iconfinder.com/data/icons/harry-potter-colour-collection/60/21_-_Harry_Potter_-_Colour_-_Glasses_and_Scar-128.png",
+        "price": 150,
+        "stock": 12,
+        "id": 2,
+        "timestamp": 1662406804018
+      }
+  ],
     "id": 1,
     "timestamp": 1662411080354
   },

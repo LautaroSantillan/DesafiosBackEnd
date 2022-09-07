@@ -43,18 +43,11 @@ const getProducts = (req, res) => {
 
 //Agrega producto a un carrito
 const addProductToCart = (req, res) => {
-    const idCartSelected = Number(req.params.id);
-    if (isNaN(idCartSelected)) {
-        return res.status(400).send({ message: 'Ingresa el ID de un carrito listado' });
-    } else {
-        const { idProduct } = req.body;
-        const productSaved = carts.saveProduct(idCartSelected, idProduct);
-        if (!productSaved) {
-            return res.status(404).send({ message: 'Error' });
-        } else {
-            res.json({ message: productSaved });
-        }
-    }
+    const cart = carts.list(req.params.id);
+    const prod = products.list(req.body.id);
+    cart.product.push(prod);
+    carts.update(cart, req.params.id);
+    res.end();
 };
 
 //Elimina producto de un carrito
