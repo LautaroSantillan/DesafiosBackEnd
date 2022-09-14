@@ -10,7 +10,7 @@ const messages = new Container(optionsMariaDB, 'messages');
 const products = new Container(optionsSQLite3, 'products');
 
 /* ------------------- Instancia Server -------------------*/
-const app = express();
+const app = express(); 
 
 /* ---------------------- Middlewares ----------------------*/
 app.use(express.static('./src/views')) 
@@ -39,7 +39,6 @@ const io = require('socket.io')(server);
 server.on('error', error => console.log(`Error en servidor ${error}`));
 
 /* ---------------------- WebSocket ----------------------*/
-
 io.on('connection', async socket => {
     console.log('Conexión establecida');
     const dbProducts = await products.getAll();
@@ -57,5 +56,3 @@ io.on('connection', async socket => {
         io.sockets.emit('messages', dbMessages);
     })
 });
-
-//npm i express && npm i morgan && npm i socket.io && npm i express-handlebars && npm i knex && npm i mysql && npm i sqlite 3 && nodemon server
