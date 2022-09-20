@@ -1,0 +1,85 @@
+/* -------------- 1° && 2° ---------------- */
+
+En la consola 1: 
+mongod --dbpath "C:\Users\santi\OnrieDrive\Escritorio\ProgramacionCoderHouse\BackEnd\DESAFIOS\DesaonfioMongoDB"
+
+En la consola 2: 
+mongo
+use ecommerce
+db.createCollection('message')
+db.createCollection('products')
+
+db.message.insert(
+    [
+        {user: "Juan", text:"Holaa"},
+        {user: "Josefina", text:"Todo bien?"},
+        {user: "Juan", text:"Todo ok"}
+    ])
+
+db.products.insert(
+    [
+        {
+            "title":"Vaso",
+            "price":890,
+            "thumbnail":"https://cdn2.iconfinder.com/data/icons/spring-30/30/Ice_Tea-256.png",
+            "id":1
+        },
+        {
+            "title":"Celular",
+            "price":1200,
+            "thumbnail":"https://cdn3.iconfinder.com/data/icons/geest-women-kit/128/bag_icons-06-256.png",
+            "id":2
+        },
+        {
+            "title":"Lentes",
+            "price":3298,
+            "thumbnail":"https://cdn3.iconfinder.com/data/icons/geek-3/24/Deal_With_It_Glasses_pixel_geek_mame-128.png",
+            "id":3
+        },
+        {
+            "title":"Billetera",
+            "price":5000,
+            "thumbnail":"https://cdn2.iconfinder.com/data/icons/round-varieties/60/Rounded_-_High_Ultra_Colour11_-_Wallet-256.png",
+            "id":4
+        },
+        {
+            "title":"Escuadra",
+            "price":460,
+            "thumbnail":"https://cdn3.iconfinder.com/data/icons/design-106/100/triangle-ruler-design-graphic-tools-wooden-triangle-squad-ruler-drawing-drafting-256.png",
+            "id":5
+        },
+        {
+            "title":"Coca-Cola",
+            "price":"180",
+            "thumbnail":"https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/cocacola-128.png",
+            "id":6
+        },
+        {
+            "name": "Lego Star Wars: The Skywalker Saga™",
+            "price": 3680,
+            "thumbnail": "https://cdn2.iconfinder.com/data/icons/heroes-villains-vol-1/100/Empire_Stormtrooper-128.png",
+            "id": 7
+        },
+        {
+            "name": "Lego Harry Potter™",
+            "price": 1750,
+            "thumbnail": "https://cdn2.iconfinder.com/data/icons/harry-potter-colour-collection/60/21_-_Harry_Potter_-_Colour_-_Glasses_and_Scar-128.png",
+            "id": 8
+        },
+        {
+            "name": "Lego Jurassic World™",
+            "price": 2130,
+            "thumbnail": "https://cdn4.iconfinder.com/data/icons/the-lost-world-flat/340/dinosaur_jurassic_animal_ancient_dino_wild_celociraptor-128.png",
+            "id": 9
+        }
+    ])
+ 
+/* -------------- 3° ----------------- */
+db.message.find({})
+db.products.find({})
+
+/* -------------- 4° --------------- */
+db.message.estimatedDocumentCount()
+db.products.estimatedDocumentCount()
+
+/* -------------- 5° CRUD ---------------- */
