@@ -5,11 +5,13 @@ mongod --dbpath "C:\Users\santi\OnrieDrive\Escritorio\ProgramacionCoderHouse\Bac
 
 En la consola 2: 
 mongo
+
 use ecommerce
+
 db.createCollection('message')
 db.createCollection('products')
 
-db.message.insert(
+db.message.insertMany(
     [
         {user: "Bot", text:"Miércoles 20 de Septiembre de 2022"},
         {user: "Bot", text:"Este es un chat, deje su mensaje abajo"},
@@ -23,7 +25,7 @@ db.message.insert(
         {user: "Josefina", text:"Yo igual jaja"}
     ])
 
-db.products.insert(
+db.products.insertMany(
     [
         {
             "title":"Vaso",
@@ -65,25 +67,25 @@ db.products.insert(
             "name": "Lego Star Wars: The Skywalker Saga™",
             "price": 3680,
             "thumbnail": "https://cdn2.iconfinder.com/data/icons/heroes-villains-vol-1/100/Empire_Stormtrooper-128.png",
-            "id": 7
+            "id":7
         },
         {
             "name": "Lego Harry Potter™",
             "price": 1750,
             "thumbnail": "https://cdn2.iconfinder.com/data/icons/harry-potter-colour-collection/60/21_-_Harry_Potter_-_Colour_-_Glasses_and_Scar-128.png",
-            "id": 8
+            "id":8
         },
         {
             "name": "Lego Jurassic World™",
             "price": 2130,
             "thumbnail": "https://cdn4.iconfinder.com/data/icons/the-lost-world-flat/340/dinosaur_jurassic_animal_ancient_dino_wild_celociraptor-128.png",
-            "id": 9
+            "id":9
         },
         {
             "name": "Pelota",
             "price": 1955,
             "thumbnail": "https://cdn0.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-6/24/2177-128.png",
-            "id": 10
+            "id":10
         }
     ])
  
@@ -96,3 +98,45 @@ db.message.estimatedDocumentCount()
 db.products.estimatedDocumentCount()
 
 /* -------------- 5° CRUD ---------------- */
+//Agregar un producto más en la colección de productos 
+db.products.insertOne (
+    {
+        "title":"Camiseta",
+        "price":4052,
+        "thumbnail":"https://cdn0.iconfinder.com/data/icons/simple-mix-glyph/160/t-shirt-128.png",
+        "id":11
+    })
+
+//Listar los productos con precio menor a 1000 pesos.
+db.productos.find({"price": {$lt: 1000}})
+
+//Listar los productos con precio entre los 1000 a 3000 pesos
+db.productos.find({$and: [{price: {$gte: 1000}}, {price: {$lte: 3000}}]})
+
+//Listar los productos con precio mayor a 3000 pesos
+db.productos.find({"price": {$gt: 3000}})
+
+//Realizar una consulta que traiga sólo el nombre del tercer producto más barato.
+db.productos.find({},{title: 1}).sort({"price": 1}).skip(2)
+
+//Hacer una actualización sobre todos los productos, agregando el campo stock a todos ellos con un valor de 100.
+ db.productos.updateMany({}, {$set: {stock: 100}}, false, true)
+
+//Cambiar el stock a cero de los productos con precios mayores a 4000 pesos
+db.productos.updateMany({price: {$gt: 4000}}, {$set: {stock: 0}})
+
+//Borrar los productos con precio menor a 1000 pesos
+db.productos.deleteMany({price: {$lt: 1000}})
+
+//Crear un usuario 'pepe' clave: 'asd456' que sólo pueda leer la base de datos ecommerce. Verificar que pepe no pueda cambiar la información
+use admin
+
+db.createUser(
+    {
+        user: "pepe",
+        pwd: "asd456",
+        roles: [
+            { role: "read", db: "ecommerce"}
+        ]
+    }
+)

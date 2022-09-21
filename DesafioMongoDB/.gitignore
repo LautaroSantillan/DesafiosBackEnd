@@ -1,0 +1,13 @@
+/journal
+/diagnostic.data
+/WiredTiger
+/WiredTiger.lock
+/WiredTiger.wt
+/WiredTiger.turtle
+/WiredTigerHS.wt
+/mongod.lock
+/_mdb_catalog.wt
+/storage.bson
+/sizeStorer.wt
+/storage.bson
+/collection-0--4175546379602169609.wt
