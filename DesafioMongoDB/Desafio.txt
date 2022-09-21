@@ -11,9 +11,16 @@ db.createCollection('products')
 
 db.message.insert(
     [
-        {user: "Juan", text:"Holaa"},
+        {user: "Bot", text:"Miércoles 20 de Septiembre de 2022"},
+        {user: "Bot", text:"Este es un chat, deje su mensaje abajo"},
+        {user: "Juan", text:"Holaa Josefina"},
         {user: "Josefina", text:"Todo bien?"},
-        {user: "Juan", text:"Todo ok"}
+        {user: "Juan", text:"Todo ok"},
+        {user: "Juan", text:"Y vos como estas?"},
+        {user: "Josefina", text:"Bien bien"},
+        {user: "Josefina", text:"Qué andabas haciendo?"},
+        {user: "Juan", text:"Estaba haciendo el desafio para CoderHouse y vos?"},
+        {user: "Josefina", text:"Yo igual jaja"}
     ])
 
 db.products.insert(
@@ -38,7 +45,7 @@ db.products.insert(
         },
         {
             "title":"Billetera",
-            "price":5000,
+            "price":950,
             "thumbnail":"https://cdn2.iconfinder.com/data/icons/round-varieties/60/Rounded_-_High_Ultra_Colour11_-_Wallet-256.png",
             "id":4
         },
@@ -71,6 +78,12 @@ db.products.insert(
             "price": 2130,
             "thumbnail": "https://cdn4.iconfinder.com/data/icons/the-lost-world-flat/340/dinosaur_jurassic_animal_ancient_dino_wild_celociraptor-128.png",
             "id": 9
+        },
+        {
+            "name": "Pelota",
+            "price": 1955,
+            "thumbnail": "https://cdn0.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-6/24/2177-128.png",
+            "id": 10
         }
     ])
  
