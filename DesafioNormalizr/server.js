@@ -1,9 +1,7 @@
 /* ---------------------- Modulos ----------------------*/
 const express = require('express');
-const ContenedorProductos = require('./clases/contenedorProductos');
-const contenedorProductos = new ContenedorProductos('./productos.json');
-const ContenedorMensajes = require('./clases/contenedorMensajeArchivo');
-const contenedorMensajes = new ContenedorMensajes('./databases/mensajes.json');
+const ContenedorProductos = require('./class/contenedorProductos');
+const ContenedorMensajes = require('./class/contenedorMensajeArchivo');
 const { Server: HttpServer } = require('http');
 const { Server: IOServer } = require('socket.io');
 
@@ -11,6 +9,10 @@ const { Server: IOServer } = require('socket.io');
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
+
+/* -------------- Bases de Datos ----------------- */
+const contenedorMensajes = new ContenedorMensajes('./databases/mensajes.json');
+const contenedorProductos = new ContenedorProductos('./databases/ecommerce.sqlite');
 
 /* ---------------------- Middlewares ----------------------*/
 app.use(express.static('public'))
