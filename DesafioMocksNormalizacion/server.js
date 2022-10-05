@@ -1,42 +1,133 @@
-/* ---------------------- Modulos ----------------------*/
-const express = require('express');
-const { Server: HttpServer } = require('http');
-const { Server: IOServer } = require('socket.io');
-const { engine } = require('express-handlebars');
-const randomData = require('./src/faker');
+//const ContenedorProductos = require('./clases/contenedorProductos.js')
+//const contenedorProductos = new ContenedorProductos('./productos.json')
 
-/* ------------------- Instancia Server -------------------*/
-const app = express();
-const httpserver = new HttpServer(app);
+const ContenedorMensajes = require('./clases/contenedorMensajeArchivo.js')
+const contenedorMensajes = new ContenedorMensajes('./mensajes.json')
 
-/* ---------------------- Middlewares ----------------------*/
-app.use(express.static('views'));
-app.engine('handlebars', engine());
+//const dotenv = require('dotenv').config()
 
-/* ------------- Motor de Plantillas ---------------------- */
-app.set('views', './views');
-app.set('view engine', 'handlebars');
+const express = require('express')
 
-/* ---------------------- Rutas ----------------------*/
-app.get('/api/products-test', (req, res) => {
-    res.render('table');
-});
+const { Server: HttpServer } = require('http')
+const { Server: IOServer } = require('socket.io')
 
-/* ---------------------- Servidor ----------------------*/
-const PORT = 8080;
-const server = httpserver.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const app = express()
+const httpServer = new HttpServer(app)
+const io = new IOServer(httpServer)
 
-const io = new IOServer(httpserver);
+const PORT = process.env.PORT || 8080
 
-server.on('error', () => console.log(`Error: ${err}`));
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-/* ---------------------- WebSocket ----------------------*/
+app.get('/', (req, res) =>{
+    res.sendFile('index.html', { root: __dirname} )
+})
 
-io.on('connection', async socket => {
-    console.log('Conexión establecida');
-    const data = randomData();
-    io.sockets.emit('products', data);
-    socket.on('product', async data => {
-        io.sockets.emit('products', data);
+app.get('/productos-test', (req,res) =>{
+    res.sendFile('productos-test.html', { root: __dirname} )
+})
+
+///////
+
+import { faker } from '@faker-js/faker'
+faker.locale = 'es'
+faker.random = 'true'
+
+let getProductoTest = async () =>{
+    const productos = []
+    for (let i=0; i < 5 ; i++){
+        const id = productos.length + 1
+        const title = faker.commerce.productName()
+        const price = faker.commerce.price()
+        const thumbnail = faker.image.imageUrl()
+        const producto = {id,title,price,thumbnail}
+        productos.push(producto)
+
+    }
+    
+    return productos
+}
+
+//////
+
+const normalizr  = require('normalizr')
+const { normalize, schema, denormalize } = normalizr
+
+const util = require('util')
+const print = (obj) =>{
+    console.log(util.inspect(obj, false, 12, true));
+}
+
+//////
+
+io.on('connection', async (socket) =>{
+    console.log('A user connected');
+
+    let getProductos = await contenedorProductos.getAll()
+    const productos =  getProductos 
+    const productosTest = await getProductoTest()
+
+    let getMensajes = await contenedorMensajes.getAll()
+    const messages = getMensajes
+    let pesoOriginal = JSON.stringify(messages).length;
+    
+    console.log(`El tamaño original del archivo era de: `, pesoOriginal);
+    
+    const idSchema = new schema.Entity('id' );
+    const authorSchema = new schema.Entity('author');
+    const textSchema = new schema.Entity('text')
+    const mensajeSchema = new schema.Entity('messages', {
+        id: idSchema,
+        author: authorSchema,
+        text: textSchema
     })
-});
+
+    const normalizedMensajes = normalize(messages, [mensajeSchema])
+    //print(normalizedMensajes)
+    console.log( `Luego el tamaño del archivo quedó en: `, JSON.stringify(normalizedMensajes).length);
+    
+    //const getNormalize = messages.map( msg => normalize(msg, mensajeSchema))
+
+    const denormalizedMensajes = denormalize(normalizedMensajes, mensajeSchema, normalizedMensajes.entities)
+    //print(denormalizedMensajes)
+    //console.log(denormalizedMensajes);
+    console.log(JSON.stringify(denormalizedMensajes).length);
+
+    let pesoComprimido = JSON.stringify(normalizedMensajes).length;
+
+    const compresion = ((pesoComprimido * 100) / pesoOriginal).toFixed(2)
+
+    console.log(`El porcentaje de compresión ha sido del: ${compresion} %`);
+
+    socket.emit('mensaje-servidor', productos, messages, compresion)
+
+    socket.on('producto-nuevo', async (producto, cb) =>{
+        await contenedorProductos.save(producto)
+        const productos = await contenedorProductos.getAll()
+
+        const id = new Date().getTime()
+        io.sockets.emit('mensaje-servidor', productos, messages)
+        cb(id)
+    })
+
+    socket.on('message-nuevo', async (message, cb) =>{        
+        await contenedorMensajes.save(message)
+        const messages = await contenedorMensajes.getAll()
+
+        io.sockets.emit('mensaje-servidor', productos, messages)
+    })
+
+    socket.on('productos-test', () =>{        
+        io.sockets.emit('mensaje-servidor-productosTest', productosTest)
+    })
+
+})
+
+httpServer.listen(PORT, (err) =>{
+    if(err) throw new Error(`Error on server: ${err}`)
+    console.log(`Server is listenning en el puerto: ${PORT}`);
+})
+
+

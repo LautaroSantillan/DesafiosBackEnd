@@ -1,0 +1,26 @@
+{
+  "name": "desafionormalizr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "faker": "^6.6.6",
+    "knex": "^2.2.0",
+    "mysql": "^2.18.1",
+    "normalizr": "^3.6.2",
+    "schema": "^0.2.1",
+    "socket.io": "^4.5.2",
+    "sqlite3": "^5.0.11"
+  }
+}
