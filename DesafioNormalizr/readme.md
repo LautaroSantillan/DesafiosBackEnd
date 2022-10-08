@@ -8,6 +8,7 @@ Sobre el desafío entregable de la clase 16, crear una vista en forma de tabla q
 
 Ahora, vamos a reformar el formato de los mensajes y la forma de comunicación del chat (centro de mensajes).
 El nuevo formato de mensaje será:
+```javascript
 	{ 
 		author: {
 			id: 'mail del usuario', 
@@ -19,24 +20,30 @@ El nuevo formato de mensaje será:
 		},
 		text: 'mensaje del usuario'
 	}
-
+```
 >>>Aspectos a incluir en el entregable: 
 
-Modificar la persistencia de los mensajes para que utilicen un contenedor que permita guardar objetos anidados (archivos, mongodb, firebase).
+1. Modificar la persistencia de los mensajes para que utilicen un contenedor que permita guardar objetos anidados (archivos, mongodb, firebase).
 
-El mensaje se envía del frontend hacia el backend, el cual lo almacenará en la base de datos elegida. Luego cuando el cliente se conecte o envie un mensaje, recibirá un array de mensajes a representar en su vista. 
+2. El mensaje se envía del frontend hacia el backend, el cual lo almacenará en la base de datos elegida. Luego cuando el cliente se conecte o envie un mensaje, recibirá un array de mensajes a representar en su vista. 
 
-El array que se devuelve debe estar normalizado con normalizr, conteniendo una entidad de autores. Considerar que el array tiene sus autores con su correspondiente id (mail del usuario), pero necesita incluir para el proceso de normalización un id para todo el array en su conjunto (podemos asignarle nosotros un valor fijo).
+3. El array que se devuelve debe estar normalizado con normalizr, conteniendo una entidad de autores. Considerar que el array tiene sus autores con su correspondiente id (mail del usuario), pero necesita incluir para el proceso de normalización un id para todo el array en su conjunto (podemos asignarle nosotros un valor fijo).
+```javascript
+Ejemplo: { id: ‘mensajes’, mensajes: [] }
+```
+4. El frontend debería poseer el mismo esquema de normalización que el backend, para que este pueda desnormalizar y presentar la información adecuada en la vista.
 
-Ejemplo: { id: ‘mensajes’, mensajes: [ ] }
-El frontend debería poseer el mismo esquema de normalización que el backend, para que este pueda desnormalizar y presentar la información adecuada en la vista.
-
-Considerar que se puede cambiar el nombre del id que usa normalizr, agregando un tercer parametro a la función schema.Entity, por ejemplo:
+5. Considerar que se puede cambiar el nombre del id que usa normalizr, agregando un tercer parametro a la función schema.Entity, por ejemplo:
+```javascript
 const schemaAuthor = new schema.Entity('author',{...},{idAttribute: 'email'});
+```
 En este schema cambia el nombre del id con que se normaliza el nombre de los autores a 'email'. Más info en la web oficial.  
-Presentar en el frontend (a modo de test) el porcentaje de compresión de los mensajes recibidos. Puede ser en el título del centro de mensajes.
 
+6. Presentar en el frontend (a modo de test) el porcentaje de compresión de los mensajes recibidos. Puede ser en el título del centro de mensajes.
 
 ### Nota: 
 Incluir en el frontend el script de normalizr de la siguiente cdn: https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js
-Así podremos utilizar los mismos métodos de normalizr que en el backend. Por ejemplo:  new normalizr.schema.Entity , normalizr.denormalize(...,...,...)
+Así podremos utilizar los mismos métodos de normalizr que en el backend. Por ejemplo:  
+```javascript
+new normalizr.schema.Entity , normalizr.denormalize(...,...,...)
+```
