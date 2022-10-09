@@ -8,7 +8,7 @@ const {
     actualizarProducto,
     eliminarProducto,
     eliminarTodosProductos
-} = require('../config/configDBproductos')
+} = require('../configDB/configDBproductos')
 
 
 class ContenedorProductos{

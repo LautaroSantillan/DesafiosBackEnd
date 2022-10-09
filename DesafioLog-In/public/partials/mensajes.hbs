@@ -1,0 +1,9 @@
+<div class="section">
+    {{#each messages }}
+        <p class"my-2 messages__container">
+            <img src={{author.avatar}} class="img-fluid img__producto" alt="">
+            <span class="text-info email">{{ author.alias }} </span>
+            <span class="text-success">: {{text}} </span>
+        </p>
+    {{/each}}
+</div>
