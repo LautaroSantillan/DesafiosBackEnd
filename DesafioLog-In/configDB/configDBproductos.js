@@ -67,6 +67,7 @@ const eliminarProducto = async (nombreBD, camporWh, op, valorWh) =>{
         console.log(error);    
     }
 }
+
 const eliminarTodosProductos = async (nombreBD) =>{
     try {
         await knex.from(nombreBD).del();
@@ -76,4 +77,12 @@ const eliminarTodosProductos = async (nombreBD) =>{
     }
 }
 
-module.exports = { crearTablaProductos, seleccionarProductos, seleccionarProductosCuando, insertarProducto, actualizarProducto, eliminarProducto, eliminarTodosProductos };
+module.exports = { 
+    crearTablaProductos,
+    seleccionarProductos,
+    seleccionarProductosCuando,
+    insertarProducto,
+    actualizarProducto,
+    eliminarProducto,
+    eliminarTodosProductos
+}

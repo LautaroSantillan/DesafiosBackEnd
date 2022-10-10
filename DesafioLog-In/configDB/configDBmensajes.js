@@ -29,7 +29,7 @@ const seleccionarMensajes = async (nombreBD, campo) =>{
 const seleccionarMensajesCuando = async (nombreBD, campo, campoWhere, op, cond) =>{
     try {
         const resp = await knex.from(nombreBD).select(campo).where(campoWhere, op ,cond);
-        return resp;       
+        return resp;
     } catch (error) {
         console.log(error);    
     }
@@ -61,7 +61,6 @@ const eliminarMensajes = async (nombreBD, camporWh, op, valorWh) =>{
         console.log(error);    
     }
 }
-
 const eliminarTodosMensajes = async (nombreBD) =>{
     try {
         await knex.from(nombreBD).del();
@@ -71,4 +70,12 @@ const eliminarTodosMensajes = async (nombreBD) =>{
     }
 }
 
-module.exports = { crearTablaMensajes, seleccionarMensajes, seleccionarMensajesCuando, insertarMensajes, actualizarMensajes, eliminarMensajes, eliminarTodosMensajes };
+module.exports = { 
+    crearTablaMensajes,
+    seleccionarMensajes,
+    seleccionarMensajesCuando,
+    insertarMensajes,
+    actualizarMensajes,
+    eliminarMensajes,
+    eliminarTodosMensajes
+}
