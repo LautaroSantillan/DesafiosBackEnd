@@ -1,5 +1,5 @@
-const { optionsMySQL } = require('../connections/conexionDB.js')
-const knex = require('knex')(optionsMySQL)
+const { optionsMySQL } = require('../connections/conexionDB.js');
+const knex = require('knex')(optionsMySQL);
 
 const crearTablaProductos = async (nombreDB) =>{
     try {
@@ -7,11 +7,8 @@ const crearTablaProductos = async (nombreDB) =>{
             table.increments('id').primary().notNullable()
             table.string('title').notNullable()
             table.string('thumbnail').notNullable()
-            //table.string('description' , 250).notNullable()
-            //table.string('code', 50).notNullable()
-            //table.string('timestamp', 100).notNullable()
             table.integer('price', 50).notNullable()
-        })
+        });
         console.log('Tabla creada');       
         await knex.destroy(); 
     } catch (error) {
@@ -21,8 +18,8 @@ const crearTablaProductos = async (nombreDB) =>{
 
 const seleccionarProductos = async (nombreBD, campo) =>{
     try {
-        const resp = await knex.from(nombreBD).select(campo)
-        return resp
+        const resp = await knex.from(nombreBD).select(campo);
+        return resp;
         await knex.destroy(); 
     } catch (error) {
         console.log(error);    
@@ -31,7 +28,7 @@ const seleccionarProductos = async (nombreBD, campo) =>{
 
 const seleccionarProductosCuando = async (nombreBD, campo, campoWhere, op, cond) =>{
     try {
-        const resp = await knex.from(nombreBD).select(campo).where(campoWhere, op ,cond)//.orderBy('id', 'desc')
+        const resp = await knex.from(nombreBD).select(campo).where(campoWhere, op ,cond);
         for (obj of resp){
             console.log(obj);
         }
@@ -44,8 +41,8 @@ const seleccionarProductosCuando = async (nombreBD, campo, campoWhere, op, cond)
 
 const insertarProducto = async(nombreBD, obj) =>{
     try {
-        await knex(nombreBD).insert(obj)
-        const producto = await knex(nombreBD).max('id')
+        await knex(nombreBD).insert(obj);
+        const producto = await knex(nombreBD).max('id');
         console.log(producto);
         await knex.destroy(); 
     } catch (error) {
@@ -53,19 +50,18 @@ const insertarProducto = async(nombreBD, obj) =>{
     }
 }
 
-
 const actualizarProducto = async (nombreBD, camporWh, valorWh, obj) =>{
     try {
-        await knex.from(nombreBD).where(camporWh, valorWh).update(obj)
-        //console.log(resp);
+        await knex.from(nombreBD).where(camporWh, valorWh).update(obj);
         await knex.destroy(); 
     } catch (error) {
         console.log(error);    
     }
 }
+
 const eliminarProducto = async (nombreBD, camporWh, op, valorWh) =>{
     try {
-        await knex.from(nombreBD).where(camporWh, op , valorWh).del()
+        await knex.from(nombreBD).where(camporWh, op , valorWh).del();
         await knex.destroy(); 
     } catch (error) {
         console.log(error);    
@@ -73,23 +69,11 @@ const eliminarProducto = async (nombreBD, camporWh, op, valorWh) =>{
 }
 const eliminarTodosProductos = async (nombreBD) =>{
     try {
-        await knex.from(nombreBD).del()
-        //console.log(resp);
+        await knex.from(nombreBD).del();
         await knex.destroy(); 
     } catch (error) {
         console.log(error);    
     }
 }
 
-
-
-module.exports = { 
-    crearTablaProductos,
-    seleccionarProductos,
-    seleccionarProductosCuando,
-    insertarProducto,
-    actualizarProducto,
-    eliminarProducto,
-    eliminarTodosProductos
-}
-
+module.exports = { crearTablaProductos, seleccionarProductos, seleccionarProductosCuando, insertarProducto, actualizarProducto, eliminarProducto, eliminarTodosProductos };

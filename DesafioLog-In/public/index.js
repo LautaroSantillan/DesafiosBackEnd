@@ -83,5 +83,3 @@ server.on('mensaje-servidor', (productos , messages, compresion, nameUser) =>{
     insertCompresionHTML(compresion);
     renderLoguin(nameUser);
 })
-
-

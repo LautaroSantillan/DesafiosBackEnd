@@ -18,5 +18,3 @@ const renderLogout = nameUser => {
 server.on('mensaje-servidor', (productos , messages, compresion, nameUser) =>{
     renderLogout (nameUser);
 })
-
-

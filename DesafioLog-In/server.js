@@ -1,29 +1,18 @@
-/* ----------------------------- Modulos ------------------------------*/
+/* ---------------------- Modulos ----------------------*/
 const express = require('express');
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+const ContenedorProductos = require('./clases/contenedorProductos');
+const ContenedorMensajes = require('./clases/contenedorMensajeArchivo');
 const { Server: HttpServer } = require('http');
 const { Server: IOServer } = require('socket.io');
 const dotenv = require('dotenv').config();
-const ContenedorProductos = require('./clases/contenedorProductos.js')
-const ContenedorMensajes = require('./clases/contenedorMensajeArchivo.js')
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const morgan = require('morgan');
 
 /* ------------------- Instancia Server -------------------*/
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
-
-/* ---------------------- Middlewares ----------------------*/
-const auth = require('./middleware/auth.middleware');
-app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(morgan('dev'));
-
-/* -------------- Bases de Datos ----------------- */
-const contenedorMensajes = new ContenedorMensajes('./databases/mensajes.json');
-const contenedorProductos = new ContenedorProductos('./databases/ecommerce.sqlite');
 
 /* ---------------- Mongo ---------------------- */
 const MongoStore = require('connect-mongo');
@@ -32,7 +21,7 @@ const mongoConfig = {
     useUnifiedTopology: true
 };
 
-/* ----------------------- Session --------------------------- */
+/* --------------- Session -------------------- */
 const { MONGO_PASSWORD, MONGO_USER, MONGO_HOST } = process.env; 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -52,21 +41,32 @@ const sessionMiddleware = session({
 const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
 io.use(wrap(sessionMiddleware));
 
-/* ----------------- Cokkie ----------------------- */
+/* -------------- Cokkie ---------------------- */
 app.use(cookieParser(process.env.COOKIES_SECRET));
 
-/* ----------------------- Rutas ------------------------*/
-/* app.get('/', (req, res) =>{
-    res.sendFile('index.html', { root: __dirname} )
-}) */
+/* -------------- Bases de Datos ----------------- */
+const contenedorMensajes = new ContenedorMensajes('./mensajes.json');
+const contenedorProductos = new ContenedorProductos('./databases/ecommerce.sqlite');
+
+/* ---------------------- Middlewares ----------------------*/
+const auth = require('./middleware/auth.middleware');
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan('dev'));
+
+/* ---------------------- Rutas ----------------------*/
+// app.get('/', (req, res) =>{
+//     res.sendFile('index.html', { root: __dirname} );
+// })
 
 app.get('/productos-test', (req,res) =>{
     res.sendFile('productos-test.html', { root: __dirname} );
 })
 
-app.get('/', auth, async (req, res) =>{
+app.get('/', auth , async (req, res) =>{
     try{
-        res.sendFile('index.html', { root: __dirname} )
+        res.sendFile('index.html', { root: __dirname} );
     }catch(err){
         res.status(500).json({
             success: false,
@@ -75,14 +75,14 @@ app.get('/', auth, async (req, res) =>{
     };
 })
 
-app.post('/', auth, async (req, res) =>{
+app.post('/', auth , async (req, res) =>{
     const logout = !req.body;
     try{
         if(!logout){
             const nameUser = req.session.userName;
             console.log(nameUser);
             res.status(200).redirect('/logout');
-        }
+        };
     }catch(err){
         res.status(500).json({
             success: false,
@@ -94,7 +94,7 @@ app.post('/', auth, async (req, res) =>{
 app.get('/logout', async (req, res) =>{
     try{
         const logout = () => {
-            req.session.destroy()
+            req.session.destroy();
         };
         setTimeout(
             logout, 5000
@@ -147,36 +147,36 @@ app.post('/login', async (req, res) =>{
 })
 
 /* ------------------- Faker -------------------- */
-const { faker } = require('@faker-js/faker');
-faker.locale = 'es'
-faker.random = 'true'
-let getProductoTest = async () =>{
-    const productos = [];
-    for (let i=0; i < 5; i++){
-        const id = productos.length + 1;
-        const title = faker.commerce.productName();
-        const price = faker.commerce.price();
-        const thumbnail = faker.image.imageUrl();
-        const producto = {id,title,price,thumbnail};
-        productos.push(producto);
-    }  
-    return productos;
-}
+// const { faker } = require('@faker-js/faker');
+// faker.locale = 'es';
+// faker.random = 'true';
+
+// let getProductoTest = async () =>{
+//     const productos = [];
+//     for (let i=0; i < 5 ; i++){
+//         const id = productos.length + 1;
+//         const title = faker.commerce.productName();
+//         const price = faker.commerce.price();
+//         const thumbnail = faker.image.imageUrl();
+//         const producto = {id,title,price,thumbnail};
+//         productos.push(producto);
+//     }
+//     return productos;
+// }
 
 /* ------------------ Normalizr ---------------- */
-const normalizr = require('normalizr');
+const normalizr  = require('normalizr');
 const { normalize, schema, denormalize } = normalizr;
+
 const util = require('util');
 const print = (obj) =>{
     console.log(util.inspect(obj, false, 12, true));
 }
 
-/* ------------------------ WebSocket -------------------------*/
+/* ---------------------- WebSocket ----------------------*/
 io.on('connection', async (socket) =>{
     console.log('Conexión establecida');
 
-    let nameUser = socket.request.session.userName;
-    
     let getProductos = await contenedorProductos.getAll();
     const productos =  getProductos ;
     const productosTest = await getProductoTest();
