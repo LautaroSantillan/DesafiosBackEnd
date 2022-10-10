@@ -15,4 +15,4 @@ Al desloguearse, se mostrará una vista con el mensaje de 'Hasta luego' más el 
 * Verificar que en los reinicios del servidor, no se pierdan las sesiones activas de los clientes.
 * Mediante el cliente web de Mongo Atlas, revisar los id de sesión correspondientes a cada cliente y sus datos.
 * Borrar una sesión de cliente en la base y comprobar que en el próximo request al usuario se le presente la vista de login.
-* Fijar un tiempo de expiración de sesión de 10 minutos recargable con cada visita del cliente al sitio y verificar que si pasa ese tiempo de inactividad el cliente quede deslogueado.# DESAFIO LOG-IN POR FORMULARIO
+* Fijar un tiempo de expiración de sesión de 10 minutos recargable con cada visita del cliente al sitio y verificar que si pasa ese tiempo de inactividad el cliente quede deslogueado.
