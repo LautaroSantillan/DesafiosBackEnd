@@ -7,11 +7,13 @@ const mensajes = async (socket, io) =>{
     const messages = getMensajes;
 
     let pesoOriginal = JSON.stringify(messages).length;
+    console.log(`Al princio el tamao del archivo era de: `, pesoOriginal);
+
     const normalizedMensajes = normalizar(messages);
-    console.log( `Luego el tamaño del archivo quedó en: `, JSON.stringify(normalizedMensajes).length);    
+    console.log(`Luego el tamaño del archivo quedó en: `, JSON.stringify(normalizedMensajes).length);    
     
     const denormalizedMensajes = desnormalizar(normalizedMensajes);
-    console.log(JSON.stringify(denormalizedMensajes).length);
+    //console.log(JSON.stringify(denormalizedMensajes).length);
 
     let pesoComprimido = JSON.stringify(normalizedMensajes).length;
     const compresion = ((pesoComprimido * 100) / pesoOriginal).toFixed(2);

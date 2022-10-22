@@ -36,18 +36,6 @@
     "text": "*Este es un mensaje de bienvenida para Nazareno*"
   },
   {
-    "id": "cangaglio@gmail.com",
-    "author": {
-      "id": "cangaglio@gmail.com",
-      "nombre": "Cande",
-      "apellido": "Gaglio",
-      "edad": 22,
-      "alias": "CGaglio",
-      "avatar": "https://cdn4.iconfinder.com/data/icons/people-avatar-filled-outline/64/girl_female_adult_people_woman_doctor_avatar-2-128.png"
-    },
-    "text": "*Este es un mensaje de bienvenida para Cande*"
-  },
-  {
     "id": "santillanlautaro03@gmail.com",
     "author": {
       "id": "santillanlautaro03@gmail.com",
@@ -106,6 +94,42 @@
       "avatar": "https://cdn4.iconfinder.com/data/icons/social-media-and-logos-12/32/Logo_reddit_robot-128.png"
     },
     "text": "LOG-IN FUNCIONANDO"
+  },
+  {
+    "id": "desafiologin@gmail.com",
+    "author": {
+      "id": "desafiologin@gmail.com",
+      "nombre": "Desafio",
+      "apellido": "Log-In",
+      "edad": "0",
+      "alias": "DevLog-In",
+      "avatar": "https://cdn3.iconfinder.com/data/icons/luchesa-vol-9/128/Html-128.png"
+    },
+    "text": "DESAFIO FINALIZADO !!!"
+  },
+  {
+    "id": "santillanlautaro03@gmail.com",
+    "author": {
+      "id": "santillanlautaro03@gmail.com",
+      "nombre": "Lautaro",
+      "apellido": "Santillan",
+      "edad": 18,
+      "alias": "LSantillan",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/scenarium-vol-1-2/128/022_workspace_workplace_beard_guy_man_laptop_computer-128.png"
+    },
+    "text": "Este es un mensaje incial para probar normalizr"
+  },
+  {
+    "id": "bot@botmail.com",
+    "author": {
+      "id": "bot@botmail.com",
+      "nombre": "BOT",
+      "apellido": "BOT",
+      "edad": 1,
+      "alias": "bot",
+      "avatar": "https://cdn4.iconfinder.com/data/icons/social-media-and-logos-12/32/Logo_reddit_robot-128.png"
+    },
+    "text": "NORMALIZR FUNCIONANDO"
   },
   {
     "id": "desafiologin@gmail.com",

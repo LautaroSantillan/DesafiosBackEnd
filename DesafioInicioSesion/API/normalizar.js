@@ -1,4 +1,4 @@
-const normalizr  = require('normalizr');
+const normalizr = require('normalizr');
 const { normalize, schema, denormalize } = normalizr;
 const idSchema = new schema.Entity('id' );
 const authorSchema = new schema.Entity('author');

@@ -14,7 +14,8 @@ const productos = require('./sockets/productos.js');
 const app = express();
 const httpServer = new HttpServer(app)
 const io = new IOSocket(httpServer)
-/* --------- sets ------------ */
+
+/* --------- MOTORES DE PLANTILLAS ------------ */
 app.set('view engine', 'hbs');
 app.set('views', (__dirname + '/public/views'));
 
@@ -57,8 +58,7 @@ io.on('connection', async (socket) =>{
     productosTestSocket(socket, io);
     productos(socket,io);
     mensajes(socket,io);
-    socket.emit ('mensaje-servidor')
-    
+    socket.emit ('mensaje-servidor');
 });
 
 /* ---------------------- Servidor ----------------------*/
@@ -67,5 +67,3 @@ httpServer.listen(PORT, (err) =>{
     if(err) throw new Error(`Error on server: ${err}`)
     console.log(`Servidor escuchando en el puerto http://localhost:${PORT}/`);
 })
-
-// npm i faker-js && npm i bcrypt && npm i connect-mongo && npm i cookie-parser && npm i dotenv && npm i express && npm i express-session && npm i express-handlebars && npm i knex && npm i mongoose && npm morgan && npm i mysql && npm i sqlite3 && npm i normalizr && npm i passport && npm i passport-local && npm i socket.io
