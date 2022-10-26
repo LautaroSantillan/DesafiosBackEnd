@@ -6,13 +6,13 @@
 * La única configuración que no va a ser manejada con esta librería va a ser el puerto de escucha del servidor. Éste deberá ser leído de los argumento pasados por línea de comando, usando alguna librería (minimist o yargs). En el caso de no pasar este parámetro por línea de comandos, conectar por defecto al puerto 8080.
 * Observación: por el momento se puede dejar la elección de sesión y de persistencia explicitada en el código mismo. Más adelante haremos también parametrizable esta configuración.
 * Agregar una ruta '/info' que presente en una vista sencilla los siguientes datos:
--- Argumentos de entrada
--- Nombre de la plataforma (sistema operativo)
--- Versión de node.js    
--- Memoria total reservada (rss)
--- Path de ejecución
--- Process id
-- Carpeta del proyecto
+1. Argumentos de entrada
+2. Nombre de la plataforma (sistema operativo)
+3. Versión de node.js    
+4. Memoria total reservada (rss)
+5. Path de ejecución
+6. Process id
+7. Carpeta del proyecto
 * Agregar otra ruta '/api/randoms' que permita calcular un cantidad de números aleatorios en el rango del 1 al 1000 especificada por parámetros de consulta (query).
 - Por ej: 
 ```javascript
