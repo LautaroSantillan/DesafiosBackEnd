@@ -9,6 +9,7 @@ const { Server: IOSocket } = require('socket.io');
 const productosTestSocket = require('./sockets/productos-test.js');
 const mensajes = require('./sockets/mensajes.js');
 const productos = require('./sockets/productos.js');
+const puerto = require('./config/puerto');
 
 /* ------------------- Instancia Server -------------------*/
 const app = express();
@@ -46,11 +47,15 @@ const signup = require('./routes/signup.js');
 const home = require('./routes/home.js');
 const logout = require('./routes/logout.js');
 const productosTest = require('./routes/productos-test.js');
+const info = require('./routes/info.js');
+const randoms = require('./routes/randoms.js');
 app.use(login);
 app.use(signup);
 app.use(home);
 app.use(logout);
 app.use(productosTest);
+app.use(info);
+app.use(randoms);
 
 /* ---------------------- WebSocket ----------------------*/
 io.on('connection', async (socket) =>{
@@ -62,7 +67,7 @@ io.on('connection', async (socket) =>{
 });
 
 /* ---------------------- Servidor ----------------------*/
-const PORT = process.env.PORT;
+const PORT = puerto;
 httpServer.listen(PORT, (err) =>{
     if(err) throw new Error(`Error on server: ${err}`)
     console.log(`Servidor escuchando en el puerto http://localhost:${PORT}/`);
