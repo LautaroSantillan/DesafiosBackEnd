@@ -1,0 +1,6 @@
+COMANDOS PARA FUNCIONAR EL NGINX CON TODAS LAS RUTAS
+$ pm2 start app.js --name="server" --watch -- -p 8080
+$ pm2 start app.js --name="cluster1" --watch -i 1 -- -p 8082
+$ pm2 start app.js --name="cluster2" --watch -i 1 -- -p 8083
+$ pm2 start app.js --name="cluster3" --watch -i 1 -- -p 8084
+$ pm2 start app.js --name="cluster4" --watch -i 1 -- -p 8085

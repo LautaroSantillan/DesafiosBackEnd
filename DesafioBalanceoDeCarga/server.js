@@ -10,13 +10,14 @@ const productosTestSocket = require('./sockets/productos-test.js');
 const mensajes = require('./sockets/mensajes.js');
 const productos = require('./sockets/productos.js');
 const puerto = require('./config/puerto');
+const modoServer = require('./config/modoServer');
 
 /* ------------------- Instancia Server -------------------*/
 const app = express();
 const httpServer = new HttpServer(app)
 const io = new IOSocket(httpServer)
 
-/* --------- MOTORES DE PLANTILLAS ------------ */
+/* --------- Motores de Plantillas ------------ */
 app.set('view engine', 'hbs');
 app.set('views', (__dirname + '/public/views'));
 
@@ -36,12 +37,12 @@ app.use(session({
 }))
 app.use(logger('dev'));
 
-/* ----------------- PASSPORT ------------------ */
+/* ----------------- Passport ------------------ */
 const passport = require('./routes/passport.js');
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* ------------------- ROUTES --------------------------- */
+/* ------------------- Routes --------------------------- */
 const login = require('./routes/login.js');
 const signup = require('./routes/signup.js');
 const home = require('./routes/home.js');
@@ -66,9 +67,29 @@ io.on('connection', async (socket) =>{
     socket.emit ('mensaje-servidor');
 });
 
-/* ---------------------- Servidor ----------------------*/
+/* ---------------------- Servidor (FORKS) ----------------------*/
 const PORT = puerto;
-httpServer.listen(PORT, (err) =>{
-    if(err) throw new Error(`Error on server: ${err}`)
-    console.log(`Servidor escuchando en el puerto http://localhost:${PORT}/`);
-})
+const modo = modoServer;
+const { fork } = require('child_process');
+const os = require('os');
+const CPUs = os.cpus();
+const numCPUs = CPUs.length;
+const cluster = require('cluster');
+
+if(cluster.isPrimary && modo === 'cluster'){
+    console.log(`Primary ${process.pid} is running`);
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+    cluster.on('online', (worker, code, signal) =>{
+        console.log(` Worker: ${worker.process.pid} start. Date: ${new Date().toLocaleDateString()}`);
+    })
+    cluster.on('exit', (worker, code, signal) =>{
+        console.log(` Worker: ${worker.process.pid} died. Date: ${new Date().toLocaleDateString()}`);
+    })
+}else {
+    httpServer.listen(PORT, (err) =>{
+        if(err) throw new Error(`Error on server: ${err}`)
+        console.log(`Servidor escuchando en el puerto http://localhost:${PORT}/ - Process ID: ${process.pid}. Date: ${new Date().toLocaleDateString()}`)
+    })
+}
