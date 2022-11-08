@@ -22,6 +22,7 @@ app.set('view engine', 'hbs');
 app.set('views', (__dirname + '/public/views'));
 
 /* ---------------------- Middlewares ----------------------*/
+const pageNotFound = require('./middlewares/pageNotFound.middleware.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
@@ -50,6 +51,7 @@ const logout = require('./routes/logout.js');
 const productosTest = require('./routes/productos-test.js');
 const info = require('./routes/info.js');
 const randoms = require('./routes/randoms.js');
+const infoCompress = require('./routes/info-compress.js');
 app.use(login);
 app.use(signup);
 app.use(home);
@@ -57,6 +59,8 @@ app.use(logout);
 app.use(productosTest);
 app.use(info);
 app.use(randoms);
+app.use(infoCompress);
+app.use(pageNotFound);
 
 /* ---------------------- WebSocket ----------------------*/
 io.on('connection', async (socket) =>{
@@ -67,7 +71,7 @@ io.on('connection', async (socket) =>{
     socket.emit ('mensaje-servidor');
 });
 
-/* ---------------------- Servidor (FORKS) ----------------------*/
+/* ---------------------- Servidor ----------------------*/
 const PORT = puerto;
 const modo = modoServer;
 const { fork } = require('child_process');
