@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    background-color:  rgb(206, 210, 226);
+}
+main{
+    padding: 2em;
+}
+.section{
+    max-width: 800px;
+    margin: auto;
+    border-radius: 10pt;
+    box-shadow: 5px 5px 13px rgb(68, 85, 156);
+    padding: 2em;
+}
+.section__tablaProductos{
+    
+}
+.messages__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    max-height: 300px;
+    box-shadow: 3px 3px 15px #023661;
+    padding: 2em;
+}
+.email{
+    font-weight: bold;
+}
+.date{
+    color: brown;
+}
+.img__producto{
+    max-width: 50px;
+    max-height: 50px;
+}
+.section__bienvenida{
+    display: flex;
+    flex-direction: column;
+}
+.boton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2em;
+}
+.flex__center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img{
+    width: 5em;
+    margin-left: 2em;
+}
+.cards{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.card{
+    min-width: 15em;
+    min-height: 25em;
+    max-width: 15em;
+    max-height: 25em;
+    width: 15em;
+    height: 25em;
+    margin-left: 1em;
+    box-shadow: 3px 3px 15px #023661;
+    background-color:  rgb(206, 210, 226);
+    border-radius: 10pt;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.img__card{
+    width: 90%;
+    max-height: 5em;
+}
