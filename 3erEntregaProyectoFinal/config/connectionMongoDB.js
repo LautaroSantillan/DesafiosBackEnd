@@ -1,27 +1,32 @@
-const dotenv = require('dotenv').config()
+/* --------------- Modulos -----------------*/
+const dotenv = require('dotenv').config();
 const logger = require('../utils/logger');
-/* --- datos para la config MongoDB Atlas */
-const mongoose = require('mongoose')
-const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST} = process.env
-/* ------ configuración conección ------ */
+
+/* --- Modulos para la config MongoDB Atlas */
+const mongoose = require('mongoose');
+const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST} = process.env;
+
+/* ------ Configuración Conexión ------ */
 const mongoConfig = {
     useNewUrlparser: true,
     useUnifiedTopology: true
-}
-/* ------ configuración url ------ */
-const mongoUrl = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority`
-/* ------ configuración coneccion ------ */
+};
+
+/* ------ Configuración MongoDB_URL ------ */
+const mongoUrl = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/myFirstDatabase?retryWrites=true&w=majority`;
+
+/* ------ Configuración conexión ------ */
 const connectionMongoDB = async () =>{
     const connectMongoDB = async () =>{
         try {
             mongoose.connect( mongoUrl, mongoConfig )
             logger.info('MongoDB connected');
-    
         } catch (error) {
             logger.error(error);
         }
-    }
-    connectMongoDB()
-}
-/* ------ exports ------ */
+    };
+    connectMongoDB();
+};
+
+/* ------ Exports ------ */
 module.exports = {mongoUrl, mongoConfig , connectionMongoDB}

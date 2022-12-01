@@ -3,7 +3,7 @@ const userSchema = require("../../models/users.model");
 
 class UsersDaoMongoDB extends UsersMongoDB{
     constructor(){
-        super('usuarios', userSchema )
+        super('usuarios', userSchema );
     }
 }
 

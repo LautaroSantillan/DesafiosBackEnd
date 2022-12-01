@@ -30,6 +30,6 @@ class UsersMongoDB{
             logger.error('Error al crear el usuario: ' + error);
         }
     }
-}
+};
 
 module.exports = UsersMongoDB
