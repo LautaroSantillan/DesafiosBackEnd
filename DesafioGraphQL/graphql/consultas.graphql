@@ -1,0 +1,29 @@
+
+query {
+    buscarUsuariosGQL(username: "gger@gmail") {
+        userEmail
+        password
+    }
+}
+
+mutation {
+    crearUsuarioGQL( input: {
+        userEmail: "testgql@testgql",
+        password: "testgql"
+    }) {
+        userEmail
+        password
+    }
+}
+
+mutation {
+    crearUsuarioGQL( usuario: input: {
+        userEmail: "testgql@testgql",
+        password: "testgql"
+    }) {
+        userEmail
+        password
+    }
+}
+
+
