@@ -1,4 +1,3 @@
-
 query {
     buscarUsuariosGQL(username: "gger@gmail") {
         userEmail
@@ -25,5 +24,3 @@ mutation {
         password
     }
 }
-
-

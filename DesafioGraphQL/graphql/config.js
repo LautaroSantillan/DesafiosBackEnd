@@ -1,7 +1,7 @@
-const { buscarUsuariosGQL , crearUsuarioGQL } = require('../config/mongoConection')
-const { graphqlHTTP } = require('express-graphql')
-const { schema } = require('../graphql/schema.js')
-
+const { buscarUsuariosGQL , crearUsuarioGQL } = require('../config/mongoConection');
+const { graphqlHTTP } = require('express-graphql');
+const { schema } = require('../graphql/schema.js');
+// 
 const configGraphql = {
     schema: schema,
     rootValue: {
@@ -10,7 +10,7 @@ const configGraphql = {
     },
     graphiql: true,
 }
+// 
+const graphql = graphqlHTTP(configGraphql);
 
-const graphql = graphqlHTTP(configGraphql)
-
-module.exports = graphql
+module.exports = graphql;

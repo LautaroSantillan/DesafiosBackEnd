@@ -1,8 +1,7 @@
-const { buildSchema } = require('graphql')
+const { buildSchema } = require('graphql');
 
-/* ---- modo de schema con buildSchema ---- */
+/* ---- método buildSchema ---- */
 const schema = buildSchema(`
-
     input UsuarioInput {
         userEmail: String,
         password: String
@@ -12,6 +11,7 @@ const schema = buildSchema(`
         userEmail: String,
         password: String
     }
+
     type Query {
         buscarUsuariosGQL(username: String): Usuario,
     }
@@ -19,7 +19,6 @@ const schema = buildSchema(`
     type Mutation {
         crearUsuarioGQL(usuario: UsuarioInput): Usuario
     }
+`);
 
-`)
-
-module.exports = { schema }
+module.exports = { schema };
