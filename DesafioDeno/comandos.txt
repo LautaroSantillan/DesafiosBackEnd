@@ -1,0 +1,9 @@
+deno run index.ts
+deno run --allow-env index.ts //lo que querramos en env // ---> permiso para tomar argumentos del env
+deno run --allow-write index.tx ---> permiso para escribir archivo
+deno run --allow-net ---> permiso para server
+instalar denon --> deno install -qAf --unstable https://deno.land/x/denon/denon.ts
+scripts --> denon --init
+
+###
+para ejecutar ---> deno start cmd
